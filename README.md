@@ -1,12 +1,15 @@
 # Generate dependency graph for Magento modules
 
-## install on MacOS
- - `git clone https://github.com/zamoroka/magento-dependency-graph.git` 
- - `brew install graphviz`
+## install
+ - clone repo
+   - `git clone https://github.com/zamoroka/magento-dependency-graph.git`
+ - get graphviz:
+   - `brew install graphviz` MacOS
+   - `sudo apt install graphviz` Ubuntu
  - install [OmnigGaffle](https://www.omnigroup.com/omnigraffle/) to view and edit .dot files (optional)
  
 # usage
- - run `sh getDependencyGraph.sh "path-to-the-magento-2-folder"`. It will generate .dot, .pdf and .svg files
+ - run `sh getDependencyGraph.sh "path-to-the-magento-2-folder" "ModuleVendor"`. It will generate .dot, .pdf and .svg files.
 
 # legend
 - orange text - module is in app/code directory

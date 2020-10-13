@@ -165,7 +165,7 @@ class DependencyCollector
     {
         $dir = $this->projectDir . $dir;
         $collect = [];
-        foreach ($this->rSearch($dir, "/.*\.php/") as $filename) {
+        foreach ($this->rSearch($dir, "/.*\.php$/") as $filename) {
             try {
                 $className = $this->getClassFullNameFromFile($filename);
                 $ref = new \ReflectionClass($className);
@@ -232,10 +232,13 @@ class DependencyCollector
      */
     private function rSearch($folder, $pattern)
     {
+        $fileList = [];
+        if (!is_dir($folder)) {
+            return $fileList;
+        }
         $dir = new RecursiveDirectoryIterator($folder);
         $ite = new RecursiveIteratorIterator($dir);
         $files = new RegexIterator($ite, $pattern, RegexIterator::GET_MATCH);
-        $fileList = [];
         foreach ($files as $file) {
             $fileName = is_array($file) && isset($file[0]) ? $file[0] : (string)$file;
             if (strpos($fileName, 'Test') !== false) {

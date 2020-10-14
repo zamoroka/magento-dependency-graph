@@ -46,7 +46,7 @@ class DependencyCollector
         $dependenciesVendor = $this->getDependenciesForDir('vendor/' . strtolower($this->moduleVendor));
         $this->modulesByLocation['app_code'] = array_keys($dependenciesAppCode);
         $this->modulesByLocation['vendor'] = array_keys($dependenciesVendor);
-        $this->dependencies = $this->dependencies + $dependenciesAppCode + $dependenciesVendor;
+        $this->dependencies = array_merge_recursive($this->dependencies, $dependenciesAppCode, $dependenciesVendor);
         ksort($this->dependencies);
 
         return $this->dependencies;

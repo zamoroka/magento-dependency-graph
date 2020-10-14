@@ -21,10 +21,9 @@ class ClassFinder
      */
     public function getAllClasses($dir)
     {
-        $classList = [];
         foreach ($this->rSearch($dir, "/.*\.php$/") as $filename) {
             try {
-                $classList[] = [
+             yield [
                     'file_name' => $filename,
                     'class_name' => $this->getClassFullNameFromFile($filename),
                 ];
@@ -33,7 +32,6 @@ class ClassFinder
             }
         }
 
-        return $classList;
     }
 
     /**

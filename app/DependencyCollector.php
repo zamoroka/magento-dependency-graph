@@ -46,7 +46,7 @@ class DependencyCollector
         $dependenciesVendor = $this->getDependenciesForDir('vendor/' . strtolower($this->moduleVendor));
         $this->modulesByLocation['app_code'] = array_keys($dependenciesAppCode);
         $this->modulesByLocation['vendor'] = array_keys($dependenciesVendor);
-        $this->dependencies = $dependenciesAppCode + $dependenciesVendor;
+        $this->dependencies = $this->dependencies + $dependenciesAppCode + $dependenciesVendor;
         ksort($this->dependencies);
 
         return $this->dependencies;
@@ -110,7 +110,21 @@ class DependencyCollector
      */
     public function isInVendor($moduleName)
     {
-        if (!in_array($moduleName, $this->modulesByLocation['app_code'])) {
+        if (in_array($moduleName, $this->modulesByLocation['vendor'])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $moduleName
+     *
+     * @return bool
+     */
+    public function isInAppCode($moduleName)
+    {
+        if (in_array($moduleName, $this->modulesByLocation['app_code'])) {
             return true;
         }
 
@@ -206,26 +220,17 @@ class DependencyCollector
                 $parentModule = $this->getModuleName($classInfo->getParentClass());
                 if ($parentModule && $parentModule != $currentModule) {
                     $collect[$currentModule][] = $parentModule;
-                    // create node even if module not exists
-                    if (!isset($collect[$parentModule])) {
-                        $collect[$parentModule] = [];
-                    }
+                    $this->addModuleNode($parentModule);
                 }
                 //        --- constructor dependencies ---
                 foreach ($this->getConstructorDependencies($classInfo, $currentModule) as $constructorDependency) {
                     $collect[$currentModule][] = $constructorDependency;
-                    // create node even if module not exists
-                    if (!isset($collect[$constructorDependency])) {
-                        $collect[$constructorDependency] = [];
-                    }
+                    $this->addModuleNode($constructorDependency);
                 }
                 //        --- interface dependencies ---
                 foreach ($this->getInterfaceDependencies($classInfo, $currentModule) as $interfaceDependency) {
                     $collect[$currentModule][] = $interfaceDependency;
-                    // create node even if module not exists
-                    if (!isset($collect[$interfaceDependency])) {
-                        $collect[$interfaceDependency] = [];
-                    }
+                    $this->addModuleNode($interfaceDependency);
                 }
                 //        --- unique dependencies ---
                 $collect[$currentModule] = array_unique($collect[$currentModule]);
@@ -251,16 +256,33 @@ class DependencyCollector
                     /** @var $dependency string */
                     $dependsOn = $dependency->getAttribute('name');
                     $collect[$moduleName][] = $dependsOn;
-                    // create node even if module not exists
-                    if (!isset($collect[$dependsOn])) {
-                        $collect[$dependsOn] = [];
-                    }
+                    $this->addModuleNode($dependsOn);
                 }
             }
             $collect[$moduleName] = array_unique($collect[$moduleName]);
         }
 
         return $collect;
+    }
+
+    /**
+     * Create node is needed for all modules even if module not exists
+     *
+     * @param $module
+     *
+     * @return DependencyCollector
+     */
+    private function addModuleNode($module)
+    {
+        if ($this->moduleVendor && strpos($module, $this->moduleVendor) === false) {
+            return $this;
+        }
+
+        if (!isset($this->dependencies[$module])) {
+            $this->dependencies[$module] = [];
+        }
+
+        return $this;
     }
 
     /**

@@ -18,7 +18,8 @@
 ![example](https://github.com/zamoroka/magento-dependency-graph/blob/master/example.png?raw=true)
 
 #### legend
-- orange text - module is in app/code directory
-- green text - module is in vendor directory
-- blue block - module is independent
-- red arrow two modules are dependent on each other
+- ![](https://via.placeholder.com/15/ffa500?text=+) orange **text** - module is in app/code directory
+- ![](https://via.placeholder.com/15/00FF00?text=+) green **text** - module is in vendor directory
+- ![](https://via.placeholder.com/15/ff0000?text=+) red **text** - module is not exists
+- ![](https://via.placeholder.com/15/1589F0?text=+) blue **block** - module is independent
+- ![](https://via.placeholder.com/15/ff0000?text=+) red **arrow** - two modules are dependent on each other

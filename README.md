@@ -11,6 +11,9 @@
 # usage
  - run `sh getDependencyGraph.sh "path-to-the-magento-2-folder" "ModuleVendor"`. It will generate .dot, .pdf and .svg files.
 
+# example of generated dependency graph
+![example](https://github.com/zamoroka/magento-dependency-graph/blob/master/example.png?raw=true)
+
 # legend
 - orange text - module is in app/code directory
 - green text - module is in vendor directory

@@ -31,7 +31,7 @@ fi
 FILE_MAGENTO="$1/bin/magento"
 
 if [ -f "$FILE_MAGENTO" ]; then
-  php app/index.php --magento-dir "$1" --module-vendor "$2" >"$(date +%Y-%m-%d)".dot
+  php index.php --magento-dir "$1" --module-vendor "$2" >"$(date +%Y-%m-%d)".dot
   dot -Tpdf -o"$(date +%Y-%m-%d)".pdf -Tsvg -o"$(date +%Y-%m-%d)".svg "$(date +%Y-%m-%d)".dot
 else
   echoerr "Provided directory is missing Magento 2 files"

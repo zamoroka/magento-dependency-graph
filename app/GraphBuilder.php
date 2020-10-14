@@ -1,5 +1,7 @@
 <?php
 
+namespace Zamoroka\MagentoDependencyGraph;
+
 class GraphBuilder
 {
     /** @var DependencyCollector */

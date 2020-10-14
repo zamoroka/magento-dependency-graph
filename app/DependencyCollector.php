@@ -277,7 +277,10 @@ class DependencyCollector
     {
         $modules = [];
         foreach ($classInfo->getInterfaces() as $interface) {
-            $modules[] = $this->getModuleName($interface);
+            $interfaceDependency = $this->getModuleName($interface);
+            if ($interfaceDependency && $interfaceDependency != $currentModule) {
+                $modules[] = $interfaceDependency;
+            }
         }
 
         return $modules;

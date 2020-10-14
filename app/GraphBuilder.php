@@ -55,9 +55,12 @@ class GraphBuilder
             if ($this->dependencyCollector->isInVendor($module)) {
                 $nodeStyling[] = 'label=' . $module;
                 $nodeStyling[] = 'fontcolor=darkgreen';
-            } else {
+            } elseif ($this->dependencyCollector->isInAppCode($module)) {
                 $nodeStyling[] = 'label=' . $module;
                 $nodeStyling[] = 'fontcolor=darkorange';
+            } else {
+                $nodeStyling[] = 'label=' . $module;
+                $nodeStyling[] = 'fontcolor=red';
             }
             if ($nodeStyling) {
                 $content .= ' ' . $module . ' [' . implode(',', $nodeStyling) . ']' . PHP_EOL;

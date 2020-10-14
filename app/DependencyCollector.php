@@ -71,6 +71,12 @@ class DependencyCollector
         return true;
     }
 
+    /**
+     * @param $filePathName
+     *
+     * @return string
+     * @throws \Exception
+     */
     public function getClassFullNameFromFile($filePathName)
     {
         $className = $this->getClassNameFromFile($filePathName);
@@ -179,35 +185,47 @@ class DependencyCollector
      */
     private function getDependenciesForDir(string $dir)
     {
-        $astLocator = (new BetterReflection())->astLocator();
-        $classLoader = require $this->projectDir . 'vendor/autoload.php';
-        $reflector = new ClassReflector(new ComposerSourceLocator($classLoader, $astLocator));
         $dir = $this->projectDir . $dir;
         $collect = [];
+        $classLoader = require $this->projectDir . 'vendor/autoload.php';
+        $astLocator = (new BetterReflection())->astLocator();
+        $reflector = new ClassReflector(new ComposerSourceLocator($classLoader, $astLocator));
         foreach ($this->rSearch($dir, "/.*\.php$/") as $filename) {
             try {
                 $className = $this->getClassFullNameFromFile($filename);
-                $classInfo = (new BetterReflection())->classReflector()->reflect($className);
+                $classInfo = $reflector->reflect($className);
                 //        --- current module ---
                 $currentModule = $this->getModuleName($classInfo);
                 if (!$currentModule) {
                     continue;
                 }
-                if ($currentModule && !isset($collect[$currentModule])) {
+                if (!isset($collect[$currentModule])) {
                     $collect[$currentModule] = [];
                 }
                 //        --- parent module ---
                 $parentModule = $this->getModuleName($classInfo->getParentClass());
                 if ($parentModule && $parentModule != $currentModule) {
                     $collect[$currentModule][] = $parentModule;
+                    // create node even if module not exists
+                    if (!isset($collect[$parentModule])) {
+                        $collect[$parentModule] = [];
+                    }
                 }
                 //        --- constructor dependencies ---
                 foreach ($this->getConstructorDependencies($classInfo, $currentModule) as $constructorDependency) {
                     $collect[$currentModule][] = $constructorDependency;
+                    // create node even if module not exists
+                    if (!isset($collect[$constructorDependency])) {
+                        $collect[$constructorDependency] = [];
+                    }
                 }
                 //        --- interface dependencies ---
                 foreach ($this->getInterfaceDependencies($classInfo, $currentModule) as $interfaceDependency) {
                     $collect[$currentModule][] = $interfaceDependency;
+                    // create node even if module not exists
+                    if (!isset($collect[$interfaceDependency])) {
+                        $collect[$interfaceDependency] = [];
+                    }
                 }
                 //        --- unique dependencies ---
                 $collect[$currentModule] = array_unique($collect[$currentModule]);
@@ -233,6 +251,10 @@ class DependencyCollector
                     /** @var $dependency string */
                     $dependsOn = $dependency->getAttribute('name');
                     $collect[$moduleName][] = $dependsOn;
+                    // create node even if module not exists
+                    if (!isset($collect[$dependsOn])) {
+                        $collect[$dependsOn] = [];
+                    }
                 }
             }
             $collect[$moduleName] = array_unique($collect[$moduleName]);

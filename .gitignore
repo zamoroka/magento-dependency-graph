@@ -1,5 +1,6 @@
 ./.git
 ./.idea
+./vendor
 *.dot
 *.pdf
 *.svg

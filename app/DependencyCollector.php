@@ -1,5 +1,12 @@
 <?php
 
+namespace Zamoroka\MagentoDependencyGraph;
+
+use Roave\BetterReflection\BetterReflection;
+use Roave\BetterReflection\Reflection\ReflectionClass;
+use Roave\BetterReflection\Reflector\ClassReflector;
+use Roave\BetterReflection\SourceLocator\Type\ComposerSourceLocator;
+
 class DependencyCollector
 {
     /** @var string */
@@ -10,6 +17,15 @@ class DependencyCollector
     private $modulesByLocation = [
         'app_code' => [],
         'vendor' => [],
+    ];
+    private $foldersToSkip = [
+        'Test',
+        'Tests',
+        'tests',
+        'Sniffs',
+        'PHP_CodeSniffer',
+        'Unit',
+        'MagentoHackathon',
     ];
     private $skipped = [];
     /** @var string|null */
@@ -59,7 +75,7 @@ class DependencyCollector
     {
         $className = $this->getClassNameFromFile($filePathName);
         if (!$className) {
-            throw new Exception("not a class");
+            throw new \Exception("not a class");
         }
 
         return $this->getClassNamespaceFromFile($filePathName) . '\\' . $this->getClassNameFromFile($filePathName);
@@ -161,47 +177,48 @@ class DependencyCollector
      *
      * @return array
      */
-    private function getDependenciesForDir($dir)
+    private function getDependenciesForDir(string $dir)
     {
+        $astLocator = (new BetterReflection())->astLocator();
+        $classLoader = require $this->projectDir . 'vendor/autoload.php';
+        $reflector = new ClassReflector(new ComposerSourceLocator($classLoader, $astLocator));
         $dir = $this->projectDir . $dir;
         $collect = [];
         foreach ($this->rSearch($dir, "/.*\.php$/") as $filename) {
             try {
                 $className = $this->getClassFullNameFromFile($filename);
-                $ref = new \ReflectionClass($className);
+                $classInfo = (new BetterReflection())->classReflector()->reflect($className);
                 //        --- current module ---
-                $currentModule = $this->getModuleName($ref);
+                $currentModule = $this->getModuleName($classInfo);
+                if (!$currentModule) {
+                    continue;
+                }
                 if ($currentModule && !isset($collect[$currentModule])) {
                     $collect[$currentModule] = [];
                 }
                 //        --- parent module ---
-                $parentClass = $ref->getParentClass() ? $ref->getParentClass() : null;
-                $parentModule = $this->getModuleName($parentClass);
+                $parentModule = $this->getModuleName($classInfo->getParentClass());
                 if ($parentModule && $parentModule != $currentModule) {
                     $collect[$currentModule][] = $parentModule;
                 }
                 //        --- constructor dependencies ---
-                $c = $ref->getConstructor();
-                if ($c) {
-                    foreach ($c->getParameters() as $p) {
-                        if ($p->getClass()) {
-                            $constructorDependency = $this->getModuleName($p->getClass());
-                            if ($constructorDependency && $constructorDependency != $currentModule) {
-                                $collect[$currentModule][] = $constructorDependency;
-                            }
-                        }
-                    }
+                foreach ($this->getConstructorDependencies($classInfo, $currentModule) as $constructorDependency) {
+                    $collect[$currentModule][] = $constructorDependency;
+                }
+                //        --- interface dependencies ---
+                foreach ($this->getInterfaceDependencies($classInfo, $currentModule) as $interfaceDependency) {
+                    $collect[$currentModule][] = $interfaceDependency;
                 }
                 //        --- unique dependencies ---
                 $collect[$currentModule] = array_unique($collect[$currentModule]);
-            } catch (Exception $exception) {
+            } catch (\Exception $exception) {
                 $filename = str_replace($dir . '/', '', $filename);
                 $this->skipped[] = $filename;
             }
         }
         foreach ($this->rSearch($dir, "/.*module.xml/") as $filename) {
             $xml = file_get_contents($filename);
-            $dom = new DOMDocument();
+            $dom = new \DOMDocument();
             $dom->loadXML($xml);
             $moduleNode = $dom->getElementsByTagName('config')->item(0)->getElementsByTagName('module')->item(0);
             $moduleName = $moduleNode->getAttribute('name');
@@ -225,6 +242,48 @@ class DependencyCollector
     }
 
     /**
+     * @param ReflectionClass $classInfo
+     *
+     * @param string $currentModule
+     *
+     * @return array
+     */
+    private function getConstructorDependencies(ReflectionClass $classInfo, string $currentModule)
+    {
+        $modules = [];
+        try {
+            $parameters = $classInfo->getConstructor()->getParameters();
+            foreach ($parameters as $parameter) {
+                $constructorDependency = $this->getModuleName($parameter->getClass());
+                if ($constructorDependency && $constructorDependency != $currentModule) {
+                    $modules[] = $constructorDependency;
+                }
+            }
+        } catch (\OutOfBoundsException $exception) {
+            // skip if there is no constructor
+        }
+
+        return $modules;
+    }
+
+    /**
+     * @param ReflectionClass $classInfo
+     *
+     * @param string $currentModule
+     *
+     * @return array
+     */
+    private function getInterfaceDependencies(ReflectionClass $classInfo, string $currentModule)
+    {
+        $modules = [];
+        foreach ($classInfo->getInterfaces() as $interface) {
+            $modules[] = $this->getModuleName($interface);
+        }
+
+        return $modules;
+    }
+
+    /**
      * @param $folder
      * @param $pattern
      *
@@ -236,18 +295,35 @@ class DependencyCollector
         if (!is_dir($folder)) {
             return $fileList;
         }
-        $dir = new RecursiveDirectoryIterator($folder);
-        $ite = new RecursiveIteratorIterator($dir);
-        $files = new RegexIterator($ite, $pattern, RegexIterator::GET_MATCH);
+        $dir = new \RecursiveDirectoryIterator($folder);
+        $ite = new \RecursiveIteratorIterator($dir);
+        $files = new \RegexIterator($ite, $pattern, \RegexIterator::GET_MATCH);
         foreach ($files as $file) {
             $fileName = is_array($file) && isset($file[0]) ? $file[0] : (string)$file;
-            if (strpos($fileName, 'Test') !== false) {
+            if ($this->isSkipFile($fileName)) {
                 continue;
             }
             $fileList[] = $fileName;
         }
 
         return $fileList;
+    }
+
+    /**
+     * @param $fileName
+     *
+     * @return bool
+     */
+    private function isSkipFile($fileName)
+    {
+        $path = explode(DIRECTORY_SEPARATOR, $fileName);
+        foreach ($this->foldersToSkip as $needle) {
+            if (in_array($needle, $path)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

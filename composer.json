@@ -1,0 +1,17 @@
+{
+    "name": "zamoroka/magento-dependency-graph",
+    "authors": [
+        {
+            "name": "Pavlo Zamoroka",
+            "email": "zapashok0@gmail.com"
+        }
+    ],
+    "require": {
+        "roave/better-reflection": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zamoroka\\MagentoDependencyGraph\\": "app"
+        }
+    }
+}

@@ -122,8 +122,7 @@ class DependencyCollector
         $classLoader = require $this->projectDir . 'vendor/autoload.php';
         $astLocator = (new BetterReflection())->astLocator();
         $reflector = new ClassReflector(new ComposerSourceLocator($classLoader, $astLocator));
-        $classes = $this->classFinder->getAllClasses($dir);
-        foreach ($classes as $class) {
+        foreach ($this->classFinder->getAllClasses($dir) as $class) {
             try {
                 $classInfo = $reflector->reflect($class['class_name']);
                 //        --- current module ---

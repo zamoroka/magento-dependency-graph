@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="-114 543 758 397" width="758" height="397">
+  <defs>
+    <font-face font-family="Helvetica" font-size="14" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="522.9492" cap-height="717.28516" ascent="770.0195" descent="-229.98047" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Helvetica"/>
+      </font-face-src>
+    </font-face>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-9 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M -8 0 L 0 3 L 0 -3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker_2" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-9 -4 10 8" markerWidth="10" markerHeight="8" color="red">
+      <g>
+        <path d="M -8 0 L 0 3 L 0 -3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.15.2 
+    <dc:date>2020-10-14 12:25:04 +0000</dc:date>
+  </metadata>
+  <g id="Canvas_1" stroke-opacity="1" stroke-dasharray="none" fill-opacity="1" stroke="none" fill="none">
+    <title>Canvas 1</title>
+    <g id="Canvas_1: Layer 1">
+      <title>Layer 1</title>
+      <g id="Graphic_2">
+        <rect x="-105.24072" y="763" width="142.27539" height="36" fill="white"/>
+        <rect x="-105.24072" y="763" width="142.27539" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-100.24072 772.5)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_Framework</tspan>
+        </text>
+      </g>
+      <g id="Graphic_3">
+        <rect x="467.5" y="831" width="129.85449" height="36" fill="#add8e6"/>
+        <rect x="467.5" y="831" width="129.85449" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(472.5 840.5)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_Inventory</tspan>
+        </text>
+      </g>
+      <g id="Line_4">
+        <line x1="46.864115" y1="790.7184" x2="467.5" y2="841.2069" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_5">
+        <rect x="230" y="758.5" width="150.08887" height="36" fill="white"/>
+        <rect x="230" y="758.5" width="150.08887" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(235 768)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_InventoryApi</tspan>
+        </text>
+      </g>
+      <g id="Line_6">
+        <line x1="370.93025" y1="797.5074" x2="475.9736" y2="831" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_7">
+        <line x1="46.933797" y1="779.9248" x2="230" y2="777.4957" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_8">
+        <rect x="-113.02686" y="657.5" width="171.10938" height="36" fill="#add8e6"/>
+        <rect x="-113.02686" y="657.5" width="171.10938" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-108.02686 667)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_MessageQueue</tspan>
+        </text>
+      </g>
+      <g id="Line_9">
+        <line x1="-32.35069" y1="753.1195" x2="-28.6035" y2="693.5" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_10">
+        <rect x="-113.10693" y="903" width="170.34375" height="36" fill="#add8e6"/>
+        <rect x="-113.10693" y="903" width="170.34375" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-108.10693 912.5)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_SalesSequence</tspan>
+        </text>
+      </g>
+      <g id="Line_11">
+        <line x1="-32.874262" y1="808.8904" x2="-28.728083" y2="903" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_12">
+        <rect x="284" y="885.5" width="155.52344" height="36" fill="#add8e6"/>
+        <rect x="284" y="885.5" width="155.52344" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(289 895)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_ScalableOms</tspan>
+        </text>
+      </g>
+      <g id="Line_13">
+        <line x1="33.522384" y1="801.9266" x2="303.59384" y2="885.5" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_14">
+        <rect x="18.5" y="844" width="107.28906" height="36" fill="white"/>
+        <rect x="18.5" y="844" width="107.28906" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(23.5 853.5)" fill="red">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="red" x="0" y="14">Magento_Sales</tspan>
+        </text>
+      </g>
+      <g id="Line_15">
+        <line x1="135.58896" y1="871.0911" x2="284" y2="892.3573" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_16">
+        <rect x="148.5" y="681" width="127.52344" height="36" fill="white"/>
+        <rect x="148.5" y="681" width="127.52344" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(153.5 690.5)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_Swagger</tspan>
+        </text>
+      </g>
+      <g id="Line_17">
+        <line x1="29.370393" y1="759.8735" x2="158.18165" y2="717" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_18">
+        <rect x="430.5" y="688.5" width="212.87012" height="36" fill="white"/>
+        <rect x="430.5" y="688.5" width="212.87012" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(435.5 698)" fill="#ff8c00">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#ff8c00" x="0" y="14">Magento_SwaggerWebapiAsync</tspan>
+        </text>
+      </g>
+      <g id="Line_19">
+        <line x1="420.60264" y1="703.8127" x2="276.02344" y2="700.4729" marker-start="url(#FilledArrow_Marker_2)" stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_20">
+        <rect x="367" y="620.5" width="119.49121" height="36" fill="white"/>
+        <rect x="367" y="620.5" width="119.49121" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(372 630)" fill="red">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="red" x="0" y="14">Magento_Webapi</tspan>
+        </text>
+      </g>
+      <g id="Line_21">
+        <line x1="357.4718" y1="658.0402" x2="276.02344" y2="681.0146" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_22">
+        <rect x="156.5" y="560.5" width="174.7461" height="36" fill="#add8e6"/>
+        <rect x="156.5" y="560.5" width="174.7461" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(161.5 570)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_SwaggerWebapi</tspan>
+        </text>
+      </g>
+      <g id="Line_23">
+        <line x1="219.49585" y1="671.424" x2="239.15102" y2="596.5" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_24">
+        <line x1="-1.3921533" y1="757.1708" x2="219.16406" y2="596.5" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_25">
+        <line x1="362.4772" y1="617.4137" x2="298.7348" y2="596.5" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_26">
+        <line x1="285.9208" y1="700.7015" x2="430.5" y2="704.0413" marker-start="url(#FilledArrow_Marker_2)" stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_27">
+        <line x1="46.851475" y1="770.4383" x2="430.5" y2="720.386" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_28">
+        <line x1="464.3383" y1="661.69916" x2="507.76726" y2="688.5" marker-start="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_29">
+        <rect x="-113.10693" y="544" width="155.53711" height="36" fill="#add8e6"/>
+        <rect x="-113.10693" y="544" width="155.53711" height="36" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-108.10693 553.5)" fill="#006400">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="#006400" x="0" y="14">Magento_AdobeImsApi</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

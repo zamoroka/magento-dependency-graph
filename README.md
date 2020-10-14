@@ -15,7 +15,7 @@
  - view files in root folder
 
 ## example of generated dependency graph
-![example](https://github.com/zamoroka/magento-dependency-graph/blob/master/example.png?raw=true)
+![example](https://github.com/zamoroka/magento-dependency-graph/blob/master/example.svg?raw=true)
 
 #### legend
 - ![](https://via.placeholder.com/15/ffa500?text=+) orange **text** - module is in app/code directory

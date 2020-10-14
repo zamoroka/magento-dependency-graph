@@ -1,5 +1,10 @@
 {
     "name": "zamoroka/magento-dependency-graph",
+    "description": "Generate dependency graph for Magento modules",
+    "type": "project",
+    "license": [
+        "Apache-2.0"
+    ],
     "authors": [
         {
             "name": "Pavlo Zamoroka",

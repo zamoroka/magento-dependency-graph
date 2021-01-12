@@ -4,7 +4,7 @@ echoerr() {
     return 1
   fi
 
-  echo "\033[37;1;41m $1\033[0m"
+  echo "\033[7;49;31m $1\033[0m"
 }
 
 echoinf() {
@@ -12,7 +12,7 @@ echoinf() {
     return 1
   fi
 
-  echo "\033[30;1;43m $1\033[0m"
+  echo "\033[7;49;33m $1\033[0m"
 }
 
 echosuc() {
@@ -20,7 +20,7 @@ echosuc() {
     return 1
   fi
 
-  echo "\033[30;1;42m $1\033[0m"
+  echo "\033[7;49;32m $1\033[0m"
 }
 
 if [[ -z "$1" ]]; then
@@ -37,5 +37,5 @@ if [ -f "$FILE_MAGENTO" ]; then
   dot -Tpdf -o"$(date +%Y-%m-%d)".pdf -Tsvg -o"$(date +%Y-%m-%d)".svg "$(date +%Y-%m-%d)".dot
   echosuc "Done."
 else
-  echoerr "Provided directory is missing Magento 2 files"
+  echoerr "Provided directory '$1' is missing Magento 2 files"
 fi

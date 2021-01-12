@@ -156,7 +156,8 @@ class DependencyCollector
             }
         }
         //        --- module.xml dependencies ---
-        foreach ($this->classFinder->rSearch($dir, "/.*module.xml/") as $filename) {
+        $moduleXml = $this->classFinder->rSearch($dir, "/.*module\.xml/");
+        foreach ($moduleXml as $filename) {
             $xml = file_get_contents($filename);
             $dom = new \DOMDocument();
             $dom->loadXML($xml);

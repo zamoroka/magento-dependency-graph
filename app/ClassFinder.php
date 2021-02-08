@@ -46,7 +46,7 @@ class ClassFinder
         if (!is_dir($folder)) {
             return $fileList;
         }
-        $dir = new \RecursiveDirectoryIterator($folder);
+        $dir = new \RecursiveDirectoryIterator($folder, \RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
         $ite = new \RecursiveIteratorIterator($dir);
         $files = new \RegexIterator($ite, $pattern, \RegexIterator::GET_MATCH);
         foreach ($files as $file) {

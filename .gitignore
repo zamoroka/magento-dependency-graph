@@ -1,6 +1,7 @@
 ./.git
 ./.idea
 ./vendor
+./export
 *.dot
 *.pdf
 *.svg

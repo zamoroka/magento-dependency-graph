@@ -10,7 +10,7 @@
 ## usage
  - `cd magento-dependency-graph`
  - `sh getDependencyGraph.sh "path-to-the-magento-2-folder" "ModuleVendor"` to generate `.dot`, `.pdf` and `.svg` files.
- - view files in root folder
+ - view files in "export" folder
 
 ## example of generated dependency graph
 ![example](https://github.com/zamoroka/magento-dependency-graph/blob/master/example.svg?raw=true)

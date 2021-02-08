@@ -31,11 +31,20 @@ fi
 FILE_MAGENTO="$1/bin/magento"
 
 if [ -f "$FILE_MAGENTO" ]; then
+  [ -d export ] || mkdir export
+
+  FILE_PDF=./export/"$(date +%Y-%m-%d)".pdf
+  FILE_SVG=./export/"$(date +%Y-%m-%d)".svg
+  FILE_DOT=./export/"$(date +%Y-%m-%d)".dot
+
   echoinf "Starting .dot generation at: $(date +%Y\.%m\.%d) $(date +%H:%M:%S)"
-  php index.php --magento-dir "$1" --module-vendor "$2" >"$(date +%Y-%m-%d)".dot
+  php index.php --magento-dir "$1" --module-vendor "$2" >"$FILE_DOT"
   echoinf "Completed .dot generation at: $(date +%Y\.%m\.%d) $(date +%H:%M:%S)"
-  dot -Tpdf -o"$(date +%Y-%m-%d)".pdf -Tsvg -o"$(date +%Y-%m-%d)".svg "$(date +%Y-%m-%d)".dot
-  echosuc "Done."
+  dot -Tpdf -o "$FILE_PDF" -Tsvg -o "$FILE_SVG" "$FILE_DOT"
+  echosuc "Done:"
+  echosuc "   $FILE_PDF"
+  echosuc "   $FILE_SVG"
+  echosuc "   $FILE_DOT"
 else
   echoerr "Provided directory '$1' is missing Magento 2 files"
 fi

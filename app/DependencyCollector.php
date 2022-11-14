@@ -4,7 +4,7 @@ namespace Zamoroka\MagentoDependencyGraph;
 
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflector\ClassReflector;
+use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\Type\ComposerSourceLocator;
 
 class DependencyCollector
@@ -121,10 +121,10 @@ class DependencyCollector
         $collect = [];
         $classLoader = require $this->projectDir . 'vendor/autoload.php';
         $astLocator = (new BetterReflection())->astLocator();
-        $reflector = new ClassReflector(new ComposerSourceLocator($classLoader, $astLocator));
+        $reflector = new DefaultReflector(new ComposerSourceLocator($classLoader, $astLocator));
         foreach ($this->classFinder->getAllClasses($dir) as $class) {
             try {
-                $classInfo = $reflector->reflect($class['class_name']);
+                $classInfo = $reflector->reflectClass($class['class_name']);
                 //        --- current module ---
                 $currentModule = $this->getModuleName($classInfo);
                 if (!$currentModule) {
